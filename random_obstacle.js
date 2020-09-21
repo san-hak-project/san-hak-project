@@ -1,4 +1,6 @@
-let game = new Phaser.Game(800, 700, Phaser.CANVAS, null, {
+const fullWidth = window.innerWidth;
+
+let game = new Phaser.Game(fullWidth, 700, Phaser.CANVAS, null, {
   preload: preload,
   create: create,
   update: update,
@@ -25,7 +27,7 @@ function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.stage.backgroundColor = "#2196F3"; // 디폴트 배경 색
   //   game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
-  backgroundLoop = game.add.tileSprite(0, 0, 800, 700, "bgLoop");
+  backgroundLoop = game.add.tileSprite(0, 0, fullWidth, 700, "bgLoop");
   box = game.add.group();
   box2 = game.add.group();
   box.enableBody = true;
@@ -33,7 +35,7 @@ function create() {
 
   for (let i = 0; i < 16; i++) {
     box2.create(0, i * 40, "box").body.immovable = true;
-    box.create(800, i * 40, "box").body.immovable = true;
+    box.create(fullWidth, i * 40, "box").body.immovable = true;
   }
 
   player = game.add.sprite(10, 300, "player"); // 왼쪽에서 10, 위에서 300 위치에 player 추가
