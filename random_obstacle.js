@@ -58,8 +58,8 @@ function create() {
 }
 
 function update() {
-  game.physics.arcade.collide(player, box);
-  game.physics.arcade.collide(player, box2);
+  //   game.physics.arcade.collide(player, box);
+  //   game.physics.arcade.collide(player, box2);
   player.body.velocity.setTo(0, 0);
 
   document.body.addEventListener("keypress", function (e) {
@@ -103,6 +103,11 @@ function update() {
 
       obstacleAlive.reset(obstacleBox.body.x, obstacleBox.body.y);
       game.physics.arcade.moveToObject(obstacleAlive, player, 200); //장애물이 현재 플레이어 위치를 기준으로 날아옴
+    }
+
+    if (game.physics.arcade.overlap(player, obstacle)) {
+      gameStart = false;
+      game.state.restart();
     }
   }
 }
