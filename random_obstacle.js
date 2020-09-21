@@ -1,4 +1,4 @@
-let game = new Phaser.Game(800, 600, Phaser.CANVAS, null, {
+let game = new Phaser.Game(800, 700, Phaser.CANVAS, null, {
   preload: preload,
   create: create,
   update: update,
@@ -10,10 +10,12 @@ let obstacleCount = Math.floor(Math.random() * 5 + 2);
 let gameStart = false;
 let text, scoreText;
 let score = 0;
+let backgroundLoop;
 
 // 게임을 시작하기 전 이미지 등 데이터를 미리 load
 function preload() {
-  game.load.image("bg", "assets/images/sea.jpg"); // 배경 이미지
+  //   game.load.image("bg", "assets/images/sea.jpg"); // 배경 이미지
+  game.load.image("bgLoop", "assets/images/bg-loop.png"); // 배경 이미지
   game.load.image("box", "assets/images/box.png"); //
   game.load.image("obstacle", "assets/images/Shark.png"); // 장애물 이미지
   game.load.image("player", "assets/images/player.png"); // 플레이어 캐릭터
@@ -22,7 +24,8 @@ function preload() {
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.stage.backgroundColor = "#2196F3"; // 디폴트 배경 색
-  game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
+  //   game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
+  backgroundLoop = game.add.tileSprite(0, 0, 800, 700, "bgLoop");
   box = game.add.group();
   box2 = game.add.group();
   box.enableBody = true;
@@ -77,6 +80,7 @@ function update() {
 
   if (gameStart) {
     text.destroy();
+    backgroundLoop.tilePosition.x -= 1;
     player.body.velocity.y = player.body.velocity.y + 20;
     player.body.velocity.x = player.body.velocity.x + 30;
 
