@@ -14,6 +14,15 @@ let text, scoreText;
 let score = 0;
 let backgroundLoop;
 
+var meter = DecibelMeter.create('meter');
+
+meter.on('ready', function (meter, sources) {
+  var mic= sources[0];
+  meter.connect(mic);
+});
+
+
+
 // 게임을 시작하기 전 이미지 등 데이터를 미리 load
 function preload() {
   //   game.load.image("bg", "assets/images/sea.jpg"); // 배경 이미지
@@ -62,9 +71,19 @@ function update() {
   //   game.physics.arcade.collide(player, box2);
   player.body.velocity.setTo(0, 0);
 
+
   document.body.addEventListener("keypress", function (e) {
     gameStart = true;
+    meter.listen();
   });
+
+  meter.on('sample', function(dB, percent, level) {
+    if(level != 0)
+    {
+      player.body.velocity.y = -level;
+      gameStart = true;
+    };
+  })
 
   if (keyMove.left.isDown) {
     player.body.velocity.x = -150;
