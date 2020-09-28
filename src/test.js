@@ -57,10 +57,12 @@ function create() {
   obstacle.setAll("outOfBoundsKill", true);
   obstacle.setAll("checkWorldBounds", true);
 
-  text = game.add.text(game.world.centerX, game.world.centerY, "Press any key to start", {});
+  text = game.add.text(game.world.centerX, game.world.centerY, "Press any key to start", {
+    font: maplestory,
+  });
   text.anchor.setTo(0.5, 0.5);
 
-  scoreText = game.add.text(game.world.centerX, 20, "", { fontSize: "15px" });
+  scoreText = game.add.text(game.world.centerX, 20, "", { fontSize: "15px", font: maplestory });
   scoreText.anchor.setTo(0.5, 0.5);
 }
 

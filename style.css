@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "maplestory";
+  src: url(./assets/fonts/Maplestory-Light.ttf);
+  src: url(./assets/fonts/Maplestory-Light.ttf) format("truetype");
+  src: local(※), url(./assets/fonts/Maplestory-Light.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: maplestory;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  background-color: #000;
+}
+
+canvas {
+  margin: auto;
+  align-self: center;
+}

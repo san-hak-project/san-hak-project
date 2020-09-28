@@ -6,20 +6,20 @@ let text, scoreText;
 let score = 0;
 let backgroundLoop;
 
-var meter = DecibelMeter.create("meter");
+// let meter = DecibelMeter.create("meter");
 
 meter.on("ready", function (meter, sources) {
-  var mic = sources[0];
+  let mic = sources[0];
   meter.connect(mic);
 });
 
-let playState = {
+let landState = {
   // 게임을 시작하기 전 이미지 등 데이터를 미리 load
   preload: function () {
-    game.load.image("bgLoop", "assets/images/bg-loop.png"); // 배경 이미지
-    game.load.image("box", "assets/images/box.png"); // 박스에서 장애물 발사
-    game.load.image("obstacle", "assets/images/Shark.png"); // 장애물 이미지
-    game.load.image("player", "assets/images/player.png"); // 플레이어 캐릭터
+    game.load.image("bgLoop", "src/assets/images/land/bg-land.png"); // 배경 이미지
+    game.load.image("box", "src/assets/images/box.png"); // 박스에서 장애물 발사
+    game.load.image("obstacle", "src/assets/images/land/tree.png"); // 장애물 이미지
+    game.load.image("player", "src/assets/images/land/player-land.png"); // 플레이어 캐릭터
   },
 
   create: function () {
@@ -50,10 +50,12 @@ let playState = {
     obstacle.setAll("outOfBoundsKill", true);
     obstacle.setAll("checkWorldBounds", true);
 
-    text = game.add.text(game.world.centerX, game.world.centerY, "Press any key to start", {});
+    text = game.add.text(game.world.centerX, game.world.centerY, "Press any key to start", {
+      font: "bold 30px maplestory",
+    });
     text.anchor.setTo(0.5, 0.5);
 
-    scoreText = game.add.text(game.world.centerX, 20, "", { fontSize: "15px" });
+    scoreText = game.add.text(game.world.centerX, 20, "", { font: "bold 15px maplestory" });
     scoreText.anchor.setTo(0.5, 0.5);
   },
 
@@ -99,13 +101,10 @@ let playState = {
         game.physics.arcade.moveToObject(obstacleAlive, player, 200); //장애물이 현재 플레이어 위치를 기준으로 날아옴
       }
 
-      if (game.physics.arcade.overlap(player, obstacle)) {
+      if (game.physics.arcade.overlap(player, obstacle) || player.y < 0 || player.y > 700) {
         gameStart = false;
-        game.state.restart();
-      }
-      if (player.y < 0 || player.y > 700) {
-        gameStart = false;
-        game.state.restart();
+        score = 0;
+        game.state.start("over");
       }
     }
   },
