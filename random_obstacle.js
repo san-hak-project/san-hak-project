@@ -6,21 +6,14 @@ let game = new Phaser.Game(fullWidth, 700, Phaser.CANVAS, null, {
   update: update,
 });
 
-<<<<<<< HEAD
 let box, obstacle, obstacleAlive, player;
 let obstacleArray = [];
 let obstacleCount = Math.floor(Math.random() * 2 + 2);
-=======
-let box, obstacle, obstacleAlive, player, keyMove;
-let obstacleArray = [];
-let obstacleCount = Math.floor(Math.random() * 5 + 2);
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
 let gameStart = false;
 let text, scoreText;
 let score = 0;
 let backgroundLoop;
 
-<<<<<<< HEAD
 var meter = DecibelMeter.create("meter");
 
 meter.on("ready", function (meter, sources) {
@@ -32,22 +25,6 @@ meter.on("ready", function (meter, sources) {
 function preload() {
   game.load.image("bgLoop", "assets/images/bg-loop.png"); // 배경 이미지
   game.load.image("box", "assets/images/box.png"); // 박스에서 장애물 발사
-=======
-var meter = DecibelMeter.create('meter');
-
-meter.on('ready', function (meter, sources) {
-  var mic= sources[0];
-  meter.connect(mic);
-});
-
-
-
-// 게임을 시작하기 전 이미지 등 데이터를 미리 load
-function preload() {
-  //   game.load.image("bg", "assets/images/sea.jpg"); // 배경 이미지
-  game.load.image("bgLoop", "assets/images/bg-loop.png"); // 배경 이미지
-  game.load.image("box", "assets/images/box.png"); //
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
   game.load.image("obstacle", "assets/images/Shark.png"); // 장애물 이미지
   game.load.image("player", "assets/images/player.png"); // 플레이어 캐릭터
 }
@@ -55,22 +32,16 @@ function preload() {
 function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   game.stage.backgroundColor = "#2196F3"; // 디폴트 배경 색
-<<<<<<< HEAD
 
   //   game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
 
   backgroundLoop = game.add.tileSprite(0, 0, fullWidth, 700, "bgLoop");
 
-=======
-  //   game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
-  backgroundLoop = game.add.tileSprite(0, 0, fullWidth, 700, "bgLoop");
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
   box = game.add.group();
   box2 = game.add.group();
   box.enableBody = true;
   box2.enableBody = true;
 
-<<<<<<< HEAD
   for (let i = 5; i < 17; i++) {
     box2.create(0, i * 40, "box").body.immovable = true;
     box.create(fullWidth, i * 40, "box").body.immovable = true;
@@ -86,25 +57,6 @@ function create() {
   obstacle.setAll("outOfBoundsKill", true);
   obstacle.setAll("checkWorldBounds", true);
 
-=======
-  for (let i = 0; i < 16; i++) {
-    box2.create(0, i * 40, "box").body.immovable = true;
-    box.create(fullWidth, i * 40, "box").body.immovable = true;
-  }
-
-  player = game.add.sprite(10, 300, "player"); // 왼쪽에서 10, 위에서 300 위치에 player 추가
-  game.physics.arcade.enable(player);
-
-  obstacle = game.add.group();
-  obstacle.enableBody = true;
-  obstacle.physicsBodyType = Phaser.Physics.ARCADE;
-  obstacle.createMultiple(obstacleCount, "obstacle"); // obstacleCount 만큼 obstacle 생성
-  obstacle.setAll("outOfBoundsKill", true);
-  obstacle.setAll("checkWorldBounds", true);
-
-  keyMove = game.input.keyboard.createCursorKeys();
-
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
   text = game.add.text(game.world.centerX, game.world.centerY, "Press any key to start", {});
   text.anchor.setTo(0.5, 0.5);
 
@@ -116,52 +68,18 @@ function update() {
   //   game.physics.arcade.collide(player, box);
   //   game.physics.arcade.collide(player, box2);
   player.body.velocity.setTo(0, 0);
-<<<<<<< HEAD
-=======
-
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
 
   document.body.addEventListener("keypress", function (e) {
     gameStart = true;
     meter.listen();
   });
 
-<<<<<<< HEAD
   meter.on("sample", function (dB, percent, level) {
     if (level != 0) {
       player.body.velocity.y = -level * 2;
       gameStart = true;
     }
   });
-=======
-  meter.on('sample', function(dB, percent, level) {
-    if(level != 0)
-    {
-      player.body.velocity.y = -level;
-      gameStart = true;
-    };
-  })
-
-  if (keyMove.left.isDown) {
-    player.body.velocity.x = -150;
-    gameStart = true;
-  } else if (keyMove.right.isDown) {
-    player.body.velocity.x = +150;
-    gameStart = true;
-  } else if (keyMove.up.isDown) {
-    player.body.velocity.y = -150;
-    gameStart = true;
-  } else if (keyMove.down.isDown) {
-    player.body.velocity.y = +150;
-    gameStart = true;
-  }
-
-  if (gameStart) {
-    text.destroy();
-    backgroundLoop.tilePosition.x -= 1;
-    player.body.velocity.y = player.body.velocity.y + 20;
-    player.body.velocity.x = player.body.velocity.x + 30;
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
 
   if (gameStart) {
     text.destroy();
@@ -178,19 +96,11 @@ function update() {
 
     box.forEachAlive((obstacleAlive) => {
       obstacleArray.push(obstacleAlive);
-<<<<<<< HEAD
     }); // 장애물이 나올 위치를 박스 기준으로 세팅(우측 전체 면)
 
     if (obstacleAlive && obstacleArray.length > 0) {
       let random = game.rnd.integerInRange(0, obstacleArray.length - 1);
       let obstacleBox = obstacleArray[random]; //박스랜덤 위치 장애물 생성
-=======
-    });
-
-    if (obstacleAlive && obstacleArray.length > 0) {
-      let random = game.rnd.integerInRange(0, obstacleArray.length - 1);
-      let obstacleBox = obstacleArray[random];
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
 
       obstacleAlive.reset(obstacleBox.body.x, obstacleBox.body.y);
       game.physics.arcade.moveToObject(obstacleAlive, player, 200); //장애물이 현재 플레이어 위치를 기준으로 날아옴
@@ -200,12 +110,9 @@ function update() {
       gameStart = false;
       game.state.restart();
     }
-<<<<<<< HEAD
     if (player.y < 0 || player.y > 700) {
       gameStart = false;
       game.state.restart();
     }
-=======
->>>>>>> adf50ba04e80b3eeeb2efc4129efa8e83829a734
   }
 }
