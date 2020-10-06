@@ -30,23 +30,20 @@ let landState = {
 
     backgroundLoop = game.add.tileSprite(0, 0, fullWidth, 700, "bgLoop");
 
-    box = game.add.group();
-    box2 = game.add.group();
-    box.enableBody = true;
-    box2.enableBody = true;
-
-    for (let i = 5; i < 17; i++) {
-      box2.create(0, i * 40, "box").body.immovable = true;
-      box.create(fullWidth, i * 40, "box").body.immovable = true;
-    }
-
     player = game.add.sprite(350, 350, "player"); // 왼쪽에서 350, 위에서 350 위치에 player 추가
     game.physics.arcade.enable(player);
+
+    box = game.add.group(); //장애물 생성 위치
+    box.enableBody = true;
+
+    for (let i = 0; i < 50; i += 3) {
+      box.create(i * 40, 450, "box").body.immovable = true;
+    }
 
     obstacle = game.add.group();
     obstacle.enableBody = true;
     obstacle.physicsBodyType = Phaser.Physics.ARCADE;
-    obstacle.createMultiple(obstacleCount, "obstacle"); // obstacleCount 만큼 obstacle 생성
+    obstacle.createMultiple(10, "obstacle");
     obstacle.setAll("outOfBoundsKill", true);
     obstacle.setAll("checkWorldBounds", true);
 
@@ -91,14 +88,14 @@ let landState = {
 
       box.forEachAlive((obstacleAlive) => {
         obstacleArray.push(obstacleAlive);
-      }); // 장애물이 나올 위치를 박스 기준으로 세팅(우측 전체 면)
+      }); // 장애물이 나올 위치를 박스 기준으로 세팅(아래면)
 
       if (obstacleAlive && obstacleArray.length > 0) {
         let random = game.rnd.integerInRange(0, obstacleArray.length - 1);
-        let obstacleBox = obstacleArray[random]; //박스랜덤 위치 장애물 생성
-
+        let obstacleBox = obstacleArray[random]; // 박스가 존재하는 랜덤 위치에 장애물 생성
         obstacleAlive.reset(obstacleBox.body.x, obstacleBox.body.y);
-        game.physics.arcade.moveToObject(obstacleAlive, player, 200); //장애물이 현재 플레이어 위치를 기준으로 날아옴
+        obstacleAlive.body.velocity.setTo(0, 0);
+        //obstacleAlive.velocity.x = -200; //장애물 뒤로 이동..해야되는데 안함
       }
 
       if (game.physics.arcade.overlap(player, obstacle) || player.y < 0 || player.y > 700) {
