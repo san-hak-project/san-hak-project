@@ -27,7 +27,7 @@
 
 ## 📌진행도
 
-> https://san-hak-project.github.io/san-hak-project/background.html
+> https://san-hak-project.github.io/san-hak-project/
 
 ## 🎮 게임 이미지
 
