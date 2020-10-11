@@ -43,7 +43,7 @@ let landState = {
     obstacle = game.add.group();
     obstacle.enableBody = true;
     obstacle.physicsBodyType = Phaser.Physics.ARCADE;
-    obstacle.createMultiple(10, "obstacle");
+    obstacle.createMultiple(5, "obstacle");
     obstacle.setAll("outOfBoundsKill", true);
     obstacle.setAll("checkWorldBounds", true);
 
@@ -68,14 +68,14 @@ let landState = {
 
     meter.on("sample", function (dB, percent, level) {
       if (level != 0) {
-        player.body.velocity.y = -level * 2;
+        player.body.velocity.y = -level * 1.5;
         gameStart = true;
       }
     });
 
     if (gameStart) {
       text.destroy();
-      backgroundLoop.tilePosition.x -= 1;
+      //backgroundLoop.tilePosition.x -= 1;
       // player.body.velocity.y = player.body.velocity.y + 20;
       // player.body.velocity.x = player.body.velocity.x + 30;
       player.body.gravity.y = 1000; // x축 움직이는 대신 중력을 주어 떨어지게
@@ -95,7 +95,8 @@ let landState = {
         let obstacleBox = obstacleArray[random]; // 박스가 존재하는 랜덤 위치에 장애물 생성
         obstacleAlive.reset(obstacleBox.body.x, obstacleBox.body.y);
         obstacleAlive.body.velocity.setTo(0, 0);
-        //obstacleAlive.velocity.x = -200; //장애물 뒤로 이동..해야되는데 안함
+        game.physics.arcade.enable(obstacleAlive); //장애물 움직이도록 도움
+        obstacleAlive.body.velocity.x = -300; 
       }
 
       if (game.physics.arcade.overlap(player, obstacle) || player.y < 0 || player.y > 700) {
