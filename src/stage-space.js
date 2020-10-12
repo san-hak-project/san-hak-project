@@ -139,6 +139,7 @@ let spaceState = {
       if (game.physics.arcade.overlap(player, obstacle)||game.physics.arcade.overlap(player, obstacle2) || player.y < 0 || player.y > 700) {
         gameStart = false;
         score = 0;
+        meter.stopListening();
         game.state.start("over");
       }
     }

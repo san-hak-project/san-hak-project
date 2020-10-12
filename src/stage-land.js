@@ -102,6 +102,7 @@ let landState = {
 
       if (game.physics.arcade.overlap(player, obstacle) || player.y < 0 || player.y > 700) {
         gameStart = false;
+        meter.stopListening();
         score = 0;
         game.state.start("over");
       }

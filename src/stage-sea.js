@@ -96,6 +96,7 @@ let seaState = {
       if (game.physics.arcade.overlap(player, obstacle) || player.y < 0 || player.y > 700) {
         gameStart = false;
         score = 0;
+        meter.stopListening();
         game.state.start("over");
       }
     }
