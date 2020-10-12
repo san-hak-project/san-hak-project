@@ -29,7 +29,7 @@ let seaState = {
 
     for (let i = 5; i < 17; i++) {
       box2.create(0, i * 40, "box").body.immovable = true;
-      box.create(fullWidth, i * 40, "box").body.immovable = true;
+      box.create(fullWidth-30, i * 40, "box").body.immovable = true;
     }
 
     player = game.add.sprite(350, 350, "player"); // 왼쪽에서 350, 위에서 350 위치에 player 추가

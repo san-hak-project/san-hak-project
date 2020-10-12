@@ -1,5 +1,6 @@
 let box, obstacle, obstacleAlive, player;
 let obstacleArray = [];
+let obstacleArray2 = [];
 let obstacleCount = Math.floor(Math.random() * 2 + 2);
 let gameStart = false;
 let text, scoreText;
