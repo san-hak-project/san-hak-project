@@ -3,6 +3,7 @@ let menuState = {
     game.load.image("land", "src/assets/images/land/land-preview.png");
     game.load.image("sea", "src/assets/images/sea/sea-preview.png");
     game.load.image("space", "src/assets/images/space/space-preview.png");
+    game.load.image("breath_check", "src/assets/images/breath_check.png");
   },
 
   create: function () {
@@ -25,6 +26,7 @@ let menuState = {
       "sea"
     );
     const landImage = game.add.sprite(game.world.centerX, game.world.centerY + 80, "land");
+    const breath_checkImage = game.add.sprite(game.world.centerX, game.world.centerY + (imageHeight+80), "breath_check");
     const spaceImage = game.add.sprite(
       game.world.centerX + (imageWidth + 50),
       game.world.centerY + 80,
@@ -54,6 +56,13 @@ let menuState = {
     spaceImage.inputEnabled = true;
     spaceImage.events.onInputDown.add(this.space, this);
     spaceImage.input.useHandCursor = true;
+
+    breath_checkImage.width = imageWidth;
+    breath_checkImage.height = imageHeight;
+    breath_checkImage.anchor.setTo(0.5, 0.5);
+    breath_checkImage.inputEnabled = true;
+    breath_checkImage.events.onInputDown.add(this.breath_check, this);
+    breath_checkImage.input.useHandCursor = true;
   },
 
   sea: function () {
@@ -64,5 +73,8 @@ let menuState = {
   },
   space: function () {
     game.state.start("space");
+  },
+  breath_check: function () {
+    game.state.start("breath_check");
   },
 };

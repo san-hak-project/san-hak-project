@@ -27,6 +27,7 @@ let landState = {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.stage.backgroundColor = "#2196F3"; // 디폴트 배경 색
 
+
     //   game.add.image(0, 0, "bg"); // 왼쪽에서 0, 위에서 0 위치에 bg:배경 이미지 추가
 
     backgroundLoop = game.add.tileSprite(0, 0, fullWidth, 700, "bgLoop");

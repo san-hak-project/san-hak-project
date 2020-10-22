@@ -8,6 +8,7 @@ game.state.add("menu", menuState);
 game.state.add("sea", seaState);
 game.state.add("land", landState);
 game.state.add("space", spaceState);
+game.state.add("breath_check", breath_checkState);
 game.state.add("over", overState);
 game.state.add("beat", beatState);
 
